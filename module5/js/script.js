@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
-  buildAndShowHomeHTML(allCategoriesUrl);, // ***** <---- TODO: STEP 1: Substitute [...] ******
+  buildAndShowHomeHTML;, // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitely setting the flag to get JSON from server processed into an object literal
 })
 // *** finish **
@@ -99,12 +99,9 @@ function buildAndShowHomeHTML (categories) {
     homeHtmlUrl,
     function (homeHtml) {
       var chosenCategoryShortName =
-      chooseRandomCategory(categories);
-      $dc.insertProperty(homehtml, 'randomCategoryShortName', chosenCategoryShortName);
-      var homeHtmlToInsertIntoMainPage = homeHtml;
-
-     document.querySelector("#main-content").innerHTML = homeHtmlToInsertIntoMainPage;
-
+      chooseRandomCategory(categories).short_name;
+      var homeHtmlToInsertIntoMainPage = insertProperty(homehtml, "randomCategoryShortName", "'"+chosenCategoryShortName+"'");
+      insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
